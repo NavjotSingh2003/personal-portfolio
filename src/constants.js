@@ -182,7 +182,7 @@ export const SkillsInfo = [
       id: 2,
       img: vpsLogo,
       school: "Army Public School , Firozpur",
-      date: "Apr 2020 - March 2022",
+      date: "Apr 2021 - March 2022",
       
       desc: "I completed my class 12 education from Army Public School, Firozpur, under the CBSE board, where I studied Physics, Chemistry, and Mathematics (PCM) with Computer Science.",
       degree: "CBSE(XII) - PCM with Computer Science",
