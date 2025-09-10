@@ -173,7 +173,7 @@ export const SkillsInfo = [
       img: glaLogo,
       school: "Thapar Universtiy",
       date: "Sept 2022 - July 2026",
-      grade: "7.3 CGPA",
+      
       desc: "I have completed my BTECH(CSE) from Thapar University, Patiala. During my time at Tiet, I gained a strong foundation in programming, software development, and computer science principles. I have studied courses such as Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Web Development, and Software Engineering. I actively participated in various workshops and technical events, which enhanced my skills and knowledge. My experience at Thapar University has been instrumental in shaping my technical abilities and professional growth.",
       degree: "Bachelor of Technology -(BTECH)",
     },
@@ -183,7 +183,7 @@ export const SkillsInfo = [
       img: vpsLogo,
       school: "Army Public School , Firozpur",
       date: "Apr 2020 - March 2022",
-      grade: "90%",
+      
       desc: "I completed my class 12 education from Army Public School, Firozpur, under the CBSE board, where I studied Physics, Chemistry, and Mathematics (PCM) with Computer Science.",
       degree: "CBSE(XII) - PCM with Computer Science",
     },
@@ -192,7 +192,7 @@ export const SkillsInfo = [
       img: vpsLogo,
       school: "Army Public School , Patiala",
       date: "Apr 2019 - March 2020",
-      grade: "77.5%",
+      
       desc: "I completed my class 10 education from Army Public School, Patiala, under the CBSE board, where I studied Science with Computer.",
       degree: "CBSE(X)",
     },
