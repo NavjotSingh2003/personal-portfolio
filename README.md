@@ -1,16 +1,35 @@
 # Navjot Singh — Personal Portfolio
 
 A fast, accessible developer portfolio built with **React**, **Vite**, and **Tailwind CSS**.  
-Live demo: _(add your URL here, e.g. Vercel deploy)_
 
----
 
-## TL;DR
+<img width="1249" height="908" alt="image" src="https://github.com/user-attachments/assets/b12b454c-fa73-4d65-b843-fdeed0724a98" />
 
-```bash
-# requirements: Node 18+ and npm
-npm i
-npm run dev         # http://localhost:5173
-npm run build       # outputs to dist/
-npm run preview     # preview production build
+
+Tech Stack
+
+Frontend: React + Vite
+
+Styling: Tailwind CSS
+
+Icons (optional): lucide-react
+
+Animation (optional): framer-motion
+
+Hosting: Vercel / Netlify / GitHub Pages (pick one)
+
+The site is a static SPA—no backend required.
+.
+├── index.html
+├── package.json
+├── public/
+├── src/
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── index.css
+│   └── components/       
+├── tailwind.config.js
+├── postcss.config.js
+└── vite.config.js
+
 
