@@ -20,16 +20,6 @@ Hosting: Vercel / Netlify / GitHub Pages (pick one)
 
 The site is a static SPA—no backend required.
 .
-├── index.html
-├── package.json
-├── public/
-├── src/
-│   ├── App.jsx
-│   ├── main.jsx
-│   ├── index.css
-│   └── components/       
-├── tailwind.config.js
-├── postcss.config.js
-└── vite.config.js
+
 
 
