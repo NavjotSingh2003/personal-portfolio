@@ -37,12 +37,13 @@ export default function About() {
           <div className="flex justify-center md:justify-start gap-4 pt-4">
             {/* ✅ Download CV Button */}
             <a
-              href="./public/Navjot_non_tech.pdf"
-              download="Navjot_Singh_CV.pdf"
-              className="bg-gray-800 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary transition-all duration-300"
-            >
-              Download CV
-            </a>
+  href="/Navjot_non_tech.pdf"
+  download="Navjot_Singh_CV.pdf"
+  className="bg-gray-800 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary transition-all duration-300"
+>
+  Download CV
+</a>
+
 
             <a
               href="#contact"
