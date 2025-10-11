@@ -1,69 +1,76 @@
-import React from "react";
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa";
+// src/components/Footer.jsx
+import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
 
-const Footer = () => {
-  // Smooth scroll function
-  const handleScroll = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+export default function Footer() {
+  // scroll back to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="text-white py-8 px-[12vw] md:px-[7vw] lg:px-[20vw]">
-      <div className="container mx-auto text-center">
-        {/* Name / Logo */}
-        <h2 className="text-xl font-semibold text-purple-500">Navjot Singh</h2>
+    <footer className="bg-gray-100 dark:bg-gray-950 text-gray-700 dark:text-gray-300 py-10 border-t border-gray-200 dark:border-gray-800">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col items-center justify-center space-y-6">
+        {/* Animated brand text */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight"
+        >
+          <span className="text-primary">Navjot</span> Singh
+        </motion.h2>
 
-        {/* Navigation Links - Responsive */}
-        <nav className="flex flex-wrap justify-center space-x-4 sm:space-x-6 mt-4">
-          {[
-            { name: "About", id: "about" },
-            { name: "Skills", id: "skills" },
-            { name: "Experience", id: "experience" },
-            { name: "Projects", id: "projects" },
-            { name: "Education", id: "education" },
-          ].map((item, index) => (
-            <button
-              key={index}
-              onClick={() => handleScroll(item.id)}
-              className="hover:text-purple-500 text-sm sm:text-base my-1"
-            >
-              {item.name}
-            </button>
-          ))}
-        </nav>
-
-        {/* Social Media Icons - Responsive */}
-        <div className="flex flex-wrap justify-center space-x-4 mt-6">
-          {[
-            { icon: <FaFacebook />, link: "" },
-            { icon: <FaTwitter />, link: "" },
-            { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/navjot-singh-a68a4a243/" },
-            { icon: <FaInstagram />, link: "https://www.instagram.com/_navi_3773" },
-            { icon: <FaYoutube />, link: "" },
-            
-          ].map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl hover:text-purple-500 transition-transform transform hover:scale-110"
-            >
-              {item.icon}
-            </a>
-          ))}
+        {/* Social links */}
+        <div className="flex gap-6 text-xl">
+          <a
+            href="https://github.com/NavjotSingh2003"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition"
+            aria-label="GitHub"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/navjotsingh2003"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href="mailto:navjotsingh2003@gmail.com"
+            className="hover:text-primary transition"
+            aria-label="Email"
+          >
+            <FaEnvelope />
+          </a>
         </div>
 
-        {/* Copyright Text */}
-        <p className="text-sm text-gray-400 mt-6">
-          © 2025 Navjot Singh. All rights reserved.
+        {/* Scroll to top button */}
+        {/* Scroll to top button */}
+<motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={scrollToTop}
+  className="p-3 bg-white dark:bg-primary text-primary dark:text-white rounded-full shadow-lg hover:shadow-primary/40 border border-gray-200 dark:border-primary/40 transition-all duration-300"
+  aria-label="Scroll to top"
+>
+  <FaArrowUp className="text-lg" />
+</motion.button>
+
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gray-300 dark:bg-gray-800 my-4"></div>
+
+        {/* Copyright */}
+        <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+          © {new Date().getFullYear()} Navjot Singh. All rights reserved.
         </p>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

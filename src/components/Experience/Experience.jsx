@@ -1,90 +1,119 @@
-import React from "react";
-import { experiences } from "../../constants"; // Import your data
+// src/components/Experience.jsx
+import { motion } from "framer-motion";
+import { fadeUp } from "../../utils/motionPresets";
 
-const Experience = () => {
+import ccsLogo from "../../assets/company_logo/ccs_logo.png";
+import saicLogo from "../../assets/company_logo/saic_logo.jpg";
+import threatPrismLogo from "../../assets/company_logo/threatPrism_logo.jpg";
+
+export default function Experience() {
+  const experiences = [
+    {
+      id: 0,
+      img: ccsLogo,
+      role: "Student-Mentor",
+      company: "Creative Computing Society",
+      date: "April 2023 - June 2025",
+      desc: "Developed dynamic and scalable web applications using the MERN stack, handling both frontend and backend development. Collaborated with cross-functional teams to build responsive UI, implement RESTful APIs, and optimize application performance in an agile environment.",
+      skills: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React JS",
+        "TypeScript",
+        "Node JS",
+        "Tailwind CSS",
+        "MongoDB",
+        "Redux",
+        "Next JS",
+      ],
+    },
+    {
+      id: 1,
+      img: saicLogo,
+      role: "Student-Mentor",
+      company: "Student Alumni Interactive Cells",
+      date: "July 2023 - March 2024",
+      desc: "Honored to be among the 800 individuals selected as executive members of the student chapter of the world's largest SAIC organization. Contributed meaningfully to its vision and objectives through mentorship and collaborative leadership.",
+      skills: [
+        "ReactJS",
+        "Redux",
+        "JavaScript",
+        "Tailwind CSS",
+        "HTML",
+        "CSS",
+        "SQL",
+      ],
+    },
+    {
+      id: 2,
+      img: threatPrismLogo,
+      role: "Cyber-Security Intern",
+      company: "Threat Prism",
+      date: "September 2021 - August 2022",
+      desc: "Completed an internship under the Cyber Security & Ethical Hacking Industrial Program. Developed an Information Gathering Tool - Network and Port Scanner. Gained practical exposure in network analysis, OSINT, and penetration testing techniques under professional mentorship.",
+      skills: ["Python", "Kali Linux", "OSINT"],
+    },
+  ];
+
   return (
-    <section
-      id="experience"
-      className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[16vw] font-sans bg-skills-gradient clip-path-custom-2"
-    >
-      {/* Section Title */}
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-white">EXPERIENCE</h2>
-        <div className="w-32 h-1 bg-purple-500 mx-auto mt-4"></div>
-        <p className="text-gray-400 mt-4 text-lg font-semibold">
-          A collection of my work experience and the roles I have taken in
-          various organizations
-        </p>
-      </div>
+    <section id="experience" className="py-24 bg-gray-50 dark:bg-gray-950">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Heading */}
+        <motion.h2
+          {...fadeUp}
+          className="text-4xl font-bold text-center mb-16 text-gray-800 dark:text-white"
+        >
+          My <span className="text-primary">Experience</span>
+        </motion.h2>
 
-      {/* Experience Timeline */}
-      <div className="relative">
-        {/* Vertical line */}
-        <div className="absolute sm:left-1/2 left-0 transform -translate-x-1/2 sm:-translate-x-0 w-1 bg-white h-full"></div>
-
-        {/* Experience Entries */}
-        {experiences.map((experience, index) => (
-          <div
-            key={experience.id}
-            className={`flex flex-col sm:flex-row items-center mb-16 ${
-              index % 2 === 0 ? "sm:justify-end" : "sm:justify-start"
-            }`}
-          >
-            {/* Timeline Circle */}
-            
-
-            {/* Content Section */}
-            <div
-              className={`w-full sm:max-w-md p-4 sm:p-8 rounded-2xl shadow-2xl border border-white bg-gray-900 backdrop-blur-md shadow-[0_0_20px_1px_rgba(130,69,236,0.3)] ${
-                index % 2 === 0 ? "sm:ml-0" : "sm:mr-0"
-              } sm:ml-44 sm:mr-44 ml-8 transform transition-transform duration-300 hover:scale-105`}
+        {/* Experience Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {experiences.map((exp) => (
+            <motion.div
+              key={exp.id}
+              {...fadeUp}
+              className="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-8 shadow-md hover:shadow-glow transition-all duration-300"
             >
-              {/* Flex container for image and text */}
-              <div className="flex items-center space-x-6">
-                {/* Company Logo/Image */}
-                <div className="w-20 h-20 bg-white rounded-md overflow-hidden">
-                  <img
-                    src={experience.img}
-                    alt={experience.company}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-
-                {/* Role, Company Name, and Date */}
-                <div className="flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white">
-                      {experience.role}
-                    </h3>
-                    <h4 className="text-md sm:text-sm text-gray-300">
-                      {experience.company}
-                    </h4>
-                  </div>
-                  {/* Date at the bottom */}
-                  <p className="text-sm text-gray-500 mt-2">{experience.date}</p>
-                </div>
+              {/* Logo */}
+              <div className="absolute -top-8 left-8 bg-white dark:bg-gray-900 rounded-full p-2 shadow-glowSm">
+                <img
+                  src={exp.img}
+                  alt={exp.company}
+                  className="w-14 h-14 object-contain rounded-full"
+                />
               </div>
 
-              <p className="mt-4 text-gray-400">{experience.desc}</p>
-              <div className="mt-4">
-                <h5 className="font-medium text-white">Skills:</h5>
-                <ul className="flex flex-wrap mt-2">
-                  {experience.skills.map((skill, index) => (
-                    <li
-                      key={index}
-                      className="bg-[#8245ec] text-gray-300 px-4 py-1 text-xs sm:text-sm rounded-lg mr-2 mb-2 border border-gray-400"
+              <div className="pt-8">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">
+                  {exp.role}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                  {exp.company}
+                </p>
+                <p className="text-sm text-primary font-medium mb-4">
+                  {exp.date}
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                  {exp.desc}
+                </p>
+
+                {/* Skill Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {exp.skills.map((skill, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
                     >
                       {skill}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
-
-export default Experience;
+}

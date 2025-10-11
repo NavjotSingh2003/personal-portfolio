@@ -1,14 +1,15 @@
-//src/components/Skills.jsx
+// src/components/Skills.jsx
 import { motion } from "framer-motion";
 import { fadeUp } from "../../utils/motionPresets";
 
+// ---- Import logos ----
 import angularLogo from "../../assets/tech_logo/angular.png";
 import bootstrapLogo from "../../assets/tech_logo/bootstrap.png";
 import cLogo from "../../assets/tech_logo/c.png";
 import cppLogo from "../../assets/tech_logo/cpp.png";
 import csharpLogo from "../../assets/tech_logo/csharp.png";
 import cssLogo from "../../assets/tech_logo/css.png";
-//import expressLogo from "../../assets/tech_logo/express.png";
+import expressLogo from "../../assets/tech_logo/express.png";
 import figmaLogo from "../../assets/tech_logo/figma.png";
 import firebaseLogo from "../../assets/tech_logo/firebase.png";
 import gitLogo from "../../assets/tech_logo/git.png";
@@ -36,6 +37,7 @@ import typescriptLogo from "../../assets/tech_logo/typescript.png";
 import vercelLogo from "../../assets/tech_logo/vercel.png";
 import vscodeLogo from "../../assets/tech_logo/vscode.png";
 
+// ---- Component ----
 export default function Skills() {
   const SkillsInfo = [
     {
@@ -60,7 +62,7 @@ export default function Skills() {
       skills: [
         { name: "Spring Boot", logo: springbootLogo },
         { name: "Node JS", logo: nodejsLogo },
-        { name: "Express JS", logo: expressjsLogo },
+        { name: "Express JS", logo: expressLogo },
         { name: "MySQL", logo: mysqlLogo },
         { name: "MongoDB", logo: mongodbLogo },
         { name: "Firebase", logo: firebaseLogo },
@@ -97,7 +99,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Title */}
+        {/* Section Title */}
         <motion.h2
           {...fadeUp}
           className="text-4xl font-bold text-center mb-16 text-gray-800 dark:text-white"
@@ -105,7 +107,7 @@ export default function Skills() {
           My <span className="text-primary">Skills</span>
         </motion.h2>
 
-        {/* Categories */}
+        {/* Category Grid */}
         <div className="space-y-16">
           {SkillsInfo.map((category, idx) => (
             <motion.div
@@ -118,12 +120,12 @@ export default function Skills() {
                 {category.title}
               </h3>
 
-              {/* Skill Grid */}
+              {/* Skills Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 place-items-center">
                 {category.skills.map((skill, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.07 }}
                     className="flex flex-col items-center justify-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-2xl shadow-md hover:shadow-glow transition-all duration-300 w-36 h-36"
                   >
                     <img
@@ -145,6 +147,3 @@ export default function Skills() {
     </section>
   );
 }
-/*export default function Skills() {
-  return <h1 style={{ color: "blue", textAlign: "center", marginTop: "100px" }}>✅ Skills Section Loaded</h1>;
-}*/

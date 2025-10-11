@@ -1,24 +1,39 @@
 // tailwind.config.js
 export default {
+  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+  extend: {
+    colors: {
+      primary: "#6366f1", // Indigo
+      accent: "#c026d3", // Pink
+    },
+    fontFamily: {
+      sans: ["Inter", "sans-serif"],
+    },
+  },
+},
+
+theme: {
     extend: {
-      keyframes: {
-        blob: {
-          '0%': { transform: 'scale(1)' },
-          '33%': { transform: 'scale(1.2)' },
-          '66%': { transform: 'scale(0.8)' },
-          '100%': { transform: 'scale(1)' },
-        },
+      colors: {
+        primary: "#6366F1", // Indigo-500
+      },
+      boxShadow: {
+        glow: "0 0 15px rgba(99, 102, 241, 0.6)",
+        glowSm: "0 0 8px rgba(99, 102, 241, 0.4)",
       },
       animation: {
-        blob: 'blob 10s infinite',
+        float: "float 3s ease-in-out infinite",
       },
-      backgroundImage: {
-        'skills-gradient': 'linear-gradient(38.73deg, rgba(204, 0, 187, 0.15) 0%, rgba(201, 32, 184, 0) 50%), linear-gradient(141.27deg, rgba(0, 70, 209, 0) 50%, rgba(0, 70, 209, 0.15) 100%)',
+      keyframes: {
+        float: {
+          "0%,100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
       },
     },
   },

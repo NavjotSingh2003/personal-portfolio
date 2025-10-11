@@ -1,148 +1,135 @@
-import React, { useState, useEffect } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+// src/components/Navbar.jsx
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Navbar() {
+  const [darkMode, setDarkMode] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Detect scroll and change navbar background
+  // ✅ Load saved theme from localStorage (and system preference)
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const savedTheme = localStorage.getItem("theme");
+    if (
+      savedTheme === "dark" ||
+      (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
   }, []);
 
-  // Smooth scroll function
-  const handleMenuItemClick = (sectionId) => {
-    setActiveSection(sectionId);
-    setIsOpen(false);
+  // ✅ Toggle Theme Function
+  const toggleTheme = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
 
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   };
 
-  const menuItems = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "work", label: "Projects" },
-    { id: "education", label: "Education" },
-  ];
+  // ✅ Smooth scroll to section
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    }
+  };
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
-        isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="text-white py-5 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md dark:shadow-gray-800/30 transition-colors duration-500">
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-lg font-semibold cursor-pointer">
-          <span className="text-[#8245ec]">&lt;</span>
-          <span className="text-white">Navi</span>
-          <span className="text-[#8245ec]">/Singh</span>
-          <span className="text-white"></span>
-          <span className="text-[#8245ec]">&gt;</span>
-        </div>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl font-bold text-gray-800 dark:text-white cursor-pointer hover:text-primary transition"
+          onClick={() => scrollToSection("about")}
+        >
+          <span className="text-primary">Navjot</span> Singh
+        </motion.h1>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-gray-300">
-          {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={`cursor-pointer hover:text-[#8245ec] ${
-                activeSection === item.id ? "text-[#8245ec]" : ""
-              }`}
-            >
-              <button onClick={() => handleMenuItemClick(item.id)}>
+        <ul className="hidden md:flex items-center gap-8 font-medium">
+          {[
+            { id: "about", label: "About" },
+            { id: "education", label: "Education" },
+            { id: "projects", label: "Projects" },
+            { id: "contact", label: "Contact" },
+          ].map((item) => (
+            <li key={item.id}>
+              <button
+                onClick={() => scrollToSection(item.id)}
+                className="text-gray-700 dark:text-gray-300 hover:text-primary transition hover:drop-shadow-[0_0_6px_rgba(99,102,241,0.8)]"
+              >
                 {item.label}
               </button>
             </li>
           ))}
         </ul>
 
-        {/* Social Icons */}
-        <div className="hidden md:flex space-x-4">
-          <a
-            href="https://github.com/Navjotsingh2003"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
+        {/* Right Controls */}
+        <div className="flex items-center gap-4">
+          {/* ✅ Dark Mode Toggle */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={toggleTheme}
+            className="text-xl text-gray-700 dark:text-gray-300 hover:text-primary transition"
+            aria-label="Toggle theme"
           >
-            <FaGithub size={24} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/navjot-singh-a68a4a243/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
-          >
-            <FaLinkedin size={24} />
-          </a>
-        </div>
+            {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon />}
+          </motion.button>
 
-        {/* Mobile Menu Icon */}
-        <div className="md:hidden">
-          {isOpen ? (
-            <FiX
-              className="text-3xl text-[#8245ec] cursor-pointer"
-              onClick={() => setIsOpen(false)}
-            />
-          ) : (
-            <FiMenu
-              className="text-3xl text-[#8245ec] cursor-pointer"
-              onClick={() => setIsOpen(true)}
-            />
-          )}
+          {/* Mobile Menu Icon */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-xl text-gray-700 dark:text-gray-300 md:hidden"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </motion.button>
         </div>
       </div>
 
-      {/* Mobile Menu Items */}
-      {isOpen && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
-            {menuItems.map((item) => (
-              <li
-                key={item.id}
-                className={`cursor-pointer hover:text-white ${
-                  activeSection === item.id ? "text-[#8245ec]" : ""
-                }`}
-              >
-                <button onClick={() => handleMenuItemClick(item.id)}>
+      {/* Mobile Drawer Menu */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800 transition-colors duration-500"
+        >
+          <ul className="flex flex-col items-center py-4 space-y-4 font-medium">
+            {[
+              { id: "about", label: "About" },
+              { id: "education", label: "Education" },
+              { id: "projects", label: "Projects" },
+              { id: "contact", label: "Contact" },
+            ].map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-gray-700 dark:text-gray-300 hover:text-primary transition"
+                >
                   {item.label}
                 </button>
               </li>
             ))}
-            <div className="flex space-x-4">
-              <a
-                href="https://github.com/Navjotsingh2003"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaGithub size={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/navjot-singh-a68a4a243/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaLinkedin size={24} />
-              </a>
-            </div>
           </ul>
-        </div>
+        </motion.div>
       )}
     </nav>
   );
-};
-
-export default Navbar;
+}

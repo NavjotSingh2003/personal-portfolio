@@ -1,47 +1,34 @@
-import React, { useRef, useState } from "react";
+
 import emailjs from "@emailjs/browser";
+// src/components/Contact.jsx
+import { useRef } from "react";
+import { motion } from "framer-motion";
+//import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Contact = () => {
+export default function Contact() {
   const form = useRef();
-  const [isSent, setIsSent] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    emailjs
+ emailjs
       .sendForm(
         "service_y9e8fya",  // Replace with your EmailJS Service ID
         "template_0v2i7gj",  // Replace with your EmailJS Template ID
         form.current,
         "UypiQgBfjkAXLwI-R"  // Replace with your EmailJS Public Key
       )
+    
+    
+    
       .then(
         () => {
-          setIsSent(true);
-          form.current.reset(); // Reset form fields after sending
-          toast.success("Message sent successfully! ✅", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+          toast.success("✅ Message sent successfully!");
+          form.current.reset();
         },
-        (error) => {
-          console.error("Error sending message:", error);
-          toast.error("Failed to send message. Please try again.", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "dark",
-          });
+        () => {
+          toast.error("❌ Failed to send. Please try again.");
         }
       );
   };
@@ -49,67 +36,99 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="flex flex-col items-center justify-center py-24 px-[12vw] md:px-[7vw] lg:px-[20vw]"
+      className="py-24 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-100"
     >
-      {/* Toast Container */}
-      <ToastContainer />
-
-      {/* Section Title */}
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-white">CONTACT</h2>
-        <div className="w-32 h-1 bg-purple-500 mx-auto mt-4"></div>
-        <p className="text-gray-400 mt-4 text-lg font-semibold">
-          I’d love to hear from you—reach out for any opportunities or questions!
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-center mb-4"
+        >
+          Let’s <span className="text-primary">Connect</span>
+        </motion.h2>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 text-sm md:text-base">
+          Feel free to reach out if you’d like to collaborate, share feedback, or just say hi!
         </p>
-      </div>
 
-      {/* Contact Form */}
-      <div className="mt-8 w-full max-w-md bg-[#0d081f] p-6 rounded-lg shadow-lg border border-gray-700">
-        <h3 className="text-xl font-semibold text-white text-center">
-          Connect With Me <span className="ml-1">🚀</span>
-        </h3>
+        {/* Contact Form */}
+        <motion.form
+          ref={form}
+          onSubmit={sendEmail}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800/30 rounded-2xl p-8 md:p-10 max-w-3xl mx-auto border border-gray-200 dark:border-gray-800"
+        >
+          {/* Name */}
+          <div className="mb-5">
+            <label
+              htmlFor="user_name"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Your Name
+            </label>
+            <input
+              type="text"
+              id="user_name"
+              name="user_name"
+              required
+              placeholder="John Doe"
+              className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition"
+            />
+          </div>
 
-        <form ref={form} onSubmit={sendEmail} className="mt-4 flex flex-col space-y-4">
-          <input
-            type="email"
-            name="user_email"
-            placeholder="Your Email"
-            required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
-          />
-          <input
-            type="text"
-            name="user_name"
-            placeholder="Your Name"
-            required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
-          />
-          <textarea
-            name="message"
-            placeholder="Message"
-            rows="4"
-            required
-            className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
-          />
-          
-          {/* Send Button */}
-          <button
+          {/* Email */}
+          <div className="mb-5">
+            <label
+              htmlFor="user_email"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Your Email
+            </label>
+            <input
+              type="email"
+              id="user_email"
+              name="user_email"
+              required
+              placeholder="example@email.com"
+              className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition"
+            />
+          </div>
+
+          {/* Message */}
+          <div className="mb-6">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              placeholder="Write your message here..."
+              className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition resize-none"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <motion.button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-500 py-3 text-white font-semibold rounded-md hover:opacity-90 transition"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 shadow-md shadow-primary/30 transition"
           >
-            Send
-          </button>
-        </form>
+            Send Message
+          </motion.button>
+        </motion.form>
+
+        {/* Toast Container */}
+        <ToastContainer position="bottom-right" autoClose={3000} theme="colored" />
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

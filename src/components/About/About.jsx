@@ -1,88 +1,73 @@
-import React from 'react';
-import ReactTypingEffect from 'react-typing-effect';
-import Tilt from 'react-parallax-tilt';
-import profileImage from '../../assets/dp.jpg';
+import { motion } from "framer-motion";
+import { fadeUp } from "../../utils/motionPresets";
+import dp from "../../assets/profile.jpeg"; // your image path
 
-const About = () => {
+export default function About() {
   return (
     <section
       id="about"
-      className="py-4 px-[7vw] md:px-[7vw] lg:px-[20vw] font-sans mt-16 md:mt-24 lg:mt-32"
+      className="pt-32 md:pt-40 pb-24 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"
     >
-      <div className="flex flex-col-reverse md:flex-row justify-between items-center">
-        {/* Left Side */}
-        <div className="md:w-1/2 text-center md:text-left mt-8 md:mt-0">
-          {/* Greeting */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 leading-tight">
-            Hi, I am
-          </h1>
-          {/* Name */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
-            Navjot Singh
+      <div className="max-w-6xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+        {/* Text Section */}
+        <motion.div
+          {...fadeUp}
+          className="flex-1 text-center md:text-left space-y-6"
+        >
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white">
+            About <span className="text-primary">Me</span>
           </h2>
-          {/* Skills Heading with Typing Effect */}
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-[#8245ec] leading-tight">
-            <span className="text-white">I am a </span>
-            <ReactTypingEffect
-              text={[
-                'Fullstack Developer',
-                'App Developer',
-                'UI/UX Designer',
-                'Coder',
-              ]}
-              speed={100}
-              eraseSpeed={50}
-              typingDelay={500}
-              eraseDelay={2000}
-              cursorRenderer={(cursor) => (
-                <span className="text-[#8245ec]">{cursor}</span>
-              )}
-            />
-          </h3>
-          {/* About Me Paragraph */}
-          <p className="text-base sm:text-lg md:text-lg text-gray-400 mb-10 mt-8 leading-relaxed">
-            I am a full-stack developer with over 2 years of experience in
-            building scalable web applications. Skilled in both front-end and
-            back-end development, I specialize in the MERN stack and other
-            modern technologies to create seamless user experiences and
-            efficient solutions.
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            Hello! 👋 I’m{" "}
+            <span className="font-semibold text-primary">Navjot Singh</span>, a
+            passionate Full-Stack Developer and Ethical Hacker dedicated to crafting
+            intuitive, scalable, and visually engaging digital experiences. I enjoy
+            transforming ideas into functional solutions that merge clean
+            aesthetics with efficient code.
           </p>
-          {/* Resume Button */}
-          <a
-            href="https://drive.google.com/file/d/148NRyOsy5ROrnmZLEPxxjAZKgGCKLOxK/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-white py-3 px-8 rounded-full mt-5 text-lg font-bold transition duration-300 transform hover:scale-105"
-            style={{
-              background: 'linear-gradient(90deg, #8245ec, #a855f7)',
-              boxShadow: '0 0 2px #8245ec, 0 0 2px #8245ec, 0 0 40px #8245ec',
-            }}
-          >
-            DOWNLOAD CV
-          </a>
-          
-        </div>
-        {/* Right Side */}
-        <div className="md:w-1/2 flex justify-center md:justify-end">
-          <Tilt
-            className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full"
-            tiltMaxAngleX={20}
-            tiltMaxAngleY={20}
-            perspective={1000}
-            scale={1.05}
-            transitionSpeed={1000}
-            gyroscope={true}
-          >
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            I specialize in <b>ReactJS</b>, <b>NextJS</b>, <b>NodeJS</b>, and
+            modern design systems like <b>Tailwind CSS</b> and <b>Kali Linux</b>.
+            I also explore backend development, AI-driven integrations, and
+            performance optimization.
+          </p>
+
+          <div className="flex justify-center md:justify-start gap-4 pt-4">
+            {/* ✅ Download CV Button */}
+            <a
+              href="./public/Navjot_non_tech.pdf"
+              download="Navjot_Singh_CV.pdf"
+              className="bg-gray-800 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary transition-all duration-300"
+            >
+              Download CV
+            </a>
+
+            <a
+              href="#contact"
+              className="border border-primary text-primary px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300"
+            >
+              Contact Me
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Image Section */}
+        <motion.div
+          {...fadeUp}
+          className="flex-1 flex justify-center md:justify-end"
+        >
+          <div className="relative group">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 blur opacity-70 group-hover:opacity-100 transition duration-700"></div>
             <img
-              src={profileImage}
-              alt="Tarun Kaushik"
-              className="w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)]"
+              src={dp}
+              alt="Navjot Singh"
+              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-xl transition-transform duration-500 group-hover:scale-105"
             />
-          </Tilt>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
-};
-
-export default About;
+}
