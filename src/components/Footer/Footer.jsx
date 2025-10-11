@@ -33,7 +33,7 @@ export default function Footer() {
             <FaGithub />
           </a>
           <a
-            href="https://www.linkedin.com/in/navjotsingh2003"
+            href="https://www.linkedin.com/in/navjot-singh-a68a4a243/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition"
